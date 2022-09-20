@@ -22,14 +22,21 @@ app.get('/', (req, res) => {
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 
-app.use(notFound)
 
-app.use(errorHandler)
 // Serve static assets if in production
+const __dirname = path.resolve();
+
 if (process.env.NODE_ENV === 'production') {
 	// Set static folder
-	app.use(express.static(path.join(__dirname, 'frontend/build')));
+	app.use(express.static(path.join(__dirname, '/frontend/build')));
 }
+
+app.get('/', (req, res) => {
+	res.send('API is running');
+})
+
+app.use(notFound)
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
