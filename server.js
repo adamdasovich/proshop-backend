@@ -31,10 +31,6 @@ if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '/frontend/build')));
 }
 
-app.get('/', (req, res) => {
-	res.send('API is running');
-})
-
 app.use(notFound)
 app.use(errorHandler)
 
